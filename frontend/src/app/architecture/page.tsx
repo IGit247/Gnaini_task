@@ -30,7 +30,7 @@ export default function ArchitecturePage() {
           </div>
 
           <a
-            href="https://github.com/suryansh00001/OF"
+            href="https://github.com/IGit247/Gnaini_task"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-white/10 hover:bg-white/15 text-white border border-white/10 transition-all self-start sm:self-auto shadow-sm"
