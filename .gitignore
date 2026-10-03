@@ -1,0 +1,40 @@
+# Environments & Secrets
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+venv/
+ENV/
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads cache
+uploads/
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Node.js
+node_modules/
+frontend/node_modules/
+.npm
+npm-debug.log*
+
+# Next.js build
+frontend/.next/
+frontend/out/
+build/
+dist/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

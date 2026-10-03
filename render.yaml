@@ -1,0 +1,50 @@
+services:
+  # FastAPI Web Service
+  - type: web
+    name: audio-notes-backend
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "python -m uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: audio-notes-db
+          property: connectionString
+      - key: GNANI_API_KEY
+        sync: false
+      - key: GNANI_API_BASE_URL
+        value: "https://api.vachana.ai"
+      - key: GNANI_DEFAULT_LANGUAGE
+        value: "en-IN"
+      - key: LLM_PROVIDER
+        value: "auto"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: STORAGE_TYPE
+        value: "local"
+      - key: CORS_ORIGINS
+        value: '["*"]'
+
+  # Next.js Frontend Service
+  - type: web
+    name: audio-notes-frontend
+    env: node
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: audio-notes-backend
+          envVarKey: RENDER_EXTERNAL_URL
+          transform: "${RENDER_EXTERNAL_URL}/api"
+
+databases:
+  - name: audio-notes-db
+    plan: free
+    region: oregon
